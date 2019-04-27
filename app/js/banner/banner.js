@@ -1,0 +1,1 @@
+angular.module("academik.banner", ['ui.bootstrap']);

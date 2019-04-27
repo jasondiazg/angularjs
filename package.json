@@ -1,0 +1,32 @@
+{
+  "name": "angularjs",
+  "version": "1.0.0",
+  "description": "AngularJS application for Academik AngularJS course.",
+  "main": "index.js",
+  "scripts": {
+    "ng-serve": "lite-server",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasondiazg/angularjs.git"
+  },
+  "keywords": [
+    "angularjs",
+    "course",
+    "academik"
+  ],
+  "author": "@jasondiazg",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/jasondiazg/angularjs/issues"
+  },
+  "homepage": "https://github.com/jasondiazg/angularjs#readme",
+  "dependencies": {
+    "angular": "^1.7.8",
+    "angular-animate": "^1.7.8",
+    "angular-sanitize": "^1.7.8",
+    "angular-ui-bootstrap": "^2.5.6",
+    "bootstrap": "^3.3.7"
+  }
+}

@@ -1,16 +1,41 @@
 <!doctype html>
 <html ng-app="academik">
   <head>
-      <title>Hello world in AngularJS</title> 
+      <title>Academik Modules - Course AngularJS</title> 
+      <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" rel="stylesheet">
+      <link  href="app/img/favicon.ico" rel="shortcut icon">
   </head>
   <body>
+      <nav class="navbar navbar-default" role="navigation" ng-controller="NavbarController">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">A menu</a>
+        </div>
+        <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+            </ul>
+        </div>
+    </nav>
     <div ng-controller="HelloWorldController">
       <label>Name:</label>
       <input type="text" ng-model="name" placeholder="Enter a name here">
       <hr>
       <h1>Hello {{name}}!</h1>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-    <script src="app/app.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="app/js/navbar/navbar.js"></script>
+    <script src="app/js/navbar/controllers/navbarController.js"></script>
+    <script src="app/js/app.js"></script>
   </body>
 </html>
