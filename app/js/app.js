@@ -1,5 +1,14 @@
-let mainModule = angular.module("academik", ["academik.navbar"]);
+(() => {
+    'use strict';
+    let mainModule = angular.module("academik", ["academik.navbar"]);
 
-mainModule.controller("HelloWorldController", function($scope) {  
-    $scope.name="Academik Students";
-});
+    mainModule.run(($rootScope) => {
+        $rootScope.content = "My content in root scope";
+    });
+
+    mainModule.controller("HelloWorldController", ($scope) => {  
+        $scope.name="Academik Students";
+        $scope.content = "My content in hello world controller";
+    });
+
+})();

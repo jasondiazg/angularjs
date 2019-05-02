@@ -4,10 +4,12 @@
       <title>Academik Modules - Course AngularJS</title> 
       <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
       <link href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" rel="stylesheet">
-      <link  href="app/img/favicon.ico" rel="shortcut icon">
+      <link href="app/css/style.css" rel="stylesheet">
+      <link href="app/img/favicon.ico" rel="shortcut icon">
   </head>
   <body>
-      <nav class="navbar navbar-default" role="navigation" ng-controller="NavbarController">
+    <div ng-controller="NavbarController">
+      <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
                 <span class="sr-only">Toggle navigation</span>
@@ -18,23 +20,32 @@
             <a class="navbar-brand" href="#">A menu</a>
         </div>
         <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Link 2</a></li>
+            <ul class="nav navbar-nav" ng-repeat="element in navbarElements">
+                <li><a href="{{element.href}}">{{element.display}}</a></li>
             </ul>
         </div>
-    </nav>
+      </nav>
+      <button ng-click="addNavbarElement()">Add element to Navbar!</button>
+      <button ng-click="emptyNavbar()">Empty navbar!</button>
+      <p>{{content}}</p>
+      <hr>
+    </div>
+    <div>
+      <p>{{content}}</p>
+    </div>
     <div ng-controller="HelloWorldController">
       <label>Name:</label>
       <input type="text" ng-model="name" placeholder="Enter a name here">
       <hr>
       <h1>Hello {{name}}!</h1>
+      <p>{{content}}</p>
     </div>
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
     <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="app/js/navbar/navbar.js"></script>
+    <script src="app/js/navbar/providers/academikNavbarProvider.js"></script>
     <script src="app/js/navbar/controllers/navbarController.js"></script>
     <script src="app/js/app.js"></script>
   </body>
