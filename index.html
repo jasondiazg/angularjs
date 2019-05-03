@@ -36,6 +36,14 @@
         <input type="text" ng-model="name" placeholder="Enter a name here">
         <hr>
         <h1>Hello {{name}}!</h1>
+        <p>Old value: {{oldValueName}}</p>
+        <p>New value: {{newValueName}}</p>
+
+        {{time}}
+
+        <br/>
+        <button ng-click="updateTime()">update time - ng-click</button>
+        <button id="updateTimeButton">update time</button>
   
         <div ng-controller="HelloWorldParentController">
           <p>Hello world parent controller</p>

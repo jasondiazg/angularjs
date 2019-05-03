@@ -3,7 +3,7 @@
     let mainModule = angular.module("academik", ["academik.navbar"]);
 
     mainModule.run(() => {
-        
+
     });
 
     mainModule.controller("HelloWorldController", ($scope, $rootScope) => {
@@ -17,6 +17,16 @@
         $rootScope.$on('eventEmited', (event, data) => {
             $scope.logs.messages +=  '\nRoot scope - receive event "' + event.name + '" with data = "' + data + '"';
         });
+
+        $scope.$watch((scope) => { return scope.name; }, (newValue, oldValue) => { $scope.newValueName = newValue; $scope.oldValueName = oldValue; });
+        
+        $scope.time = new Date();
+
+        $scope.updateTime = () => { $scope.time = new Date(); }
+
+        document.getElementById("updateTimeButton").addEventListener('click', () => { $scope.time = new Date(); $scope.$digest(); });
+        //document.getElementById("updateTimeButton").addEventListener('click', () => { $scope.$apply(() => { $scope.time = new Date(); });
+});
     });
 
     mainModule.controller("HelloWorldParentController", ($scope) => {
