@@ -17,7 +17,6 @@
         }
 
         $scope.navbarElements = $academikNavbar.elements.get();
-        $scope.content = "My content in navbar controller";
 
     });
 
