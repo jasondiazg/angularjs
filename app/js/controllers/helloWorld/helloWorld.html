@@ -1,0 +1,38 @@
+<div>
+  <div>
+    <p>Hello world controller</p>
+    <label>Name:</label>
+    <input type="text" ng-model="name" placeholder="Enter a name here">
+    <hr>
+    <h1>Hello {{name}}!</h1>
+    <p>Old value: {{oldValueName}}</p>
+    <p>New value: {{newValueName}}</p>
+
+    {{time}}
+
+    <br/>
+    <button ng-click="updateTime()">update time - ng-click</button>
+    <button id="updateTimeButton">update time</button>
+
+    <div ng-controller="HelloWorldParentController">
+      <p>Hello world parent controller</p>
+      <label>Name:</label>
+      <input type="text" ng-model="name" placeholder="Enter a name here">
+      <hr>
+      <h1>Hello {{name}}!</h1>
+      <button ng-click="greetHelloWorldParent()">Greet!</button>
+
+      <div ng-controller="HelloWorldChildController">
+        <p>Hello world child controller</p>
+        <label>Name:</label>
+        <input type="text" ng-model="name" placeholder="Enter a name here">
+        <hr>
+        <h1>Hello {{name}}!</h1>
+        <button ng-click="greetHelloWorldChild()">Greet!</button>
+      </div>
+    </div>
+    <br><br>        
+    <h1>LOG:</h1>
+    <pre><code>{{logs.messages}}</code></pre>
+  </div>
+</div>

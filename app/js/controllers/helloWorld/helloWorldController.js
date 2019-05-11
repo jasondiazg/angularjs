@@ -1,12 +1,8 @@
 (() => {
     'use strict';
-    let mainModule = angular.module("academik", ["academik.navbar"]);
+    let mainModule = angular.module("academik");
 
-    mainModule.run(() => {
-
-    });
-
-    mainModule.controller("HelloWorldController", ($scope, $rootScope) => {
+    mainModule.controller("HelloWorldController", function($scope, $rootScope) {
         $scope.logs = { messages: "" };
         $scope.name= "Academik Students";
         
@@ -24,9 +20,8 @@
 
         $scope.updateTime = () => { $scope.time = new Date(); }
 
-        document.getElementById("updateTimeButton").addEventListener('click', () => { $scope.time = new Date(); $scope.$digest(); });
-        //document.getElementById("updateTimeButton").addEventListener('click', () => { $scope.$apply(() => { $scope.time = new Date(); });
-});
+        //document.getElementById("updateTimeButton").addEventListener('click', () => { $scope.time = new Date(); $scope.$digest(); });
+        document.getElementById("updateTimeButton").addEventListener('click', () => { $scope.$apply(() => { $scope.time = new Date(); }) });
     });
 
     mainModule.controller("HelloWorldParentController", ($scope) => {

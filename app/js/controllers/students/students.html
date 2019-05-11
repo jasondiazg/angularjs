@@ -1,0 +1,84 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>Students CRUD</h1>
+        <p>This is a CRUD (create, read, update and delete) example for an entity.</p>
+    </div>
+</div>
+
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <label for="name">{{vm.headers[2]}}</label>
+                <input type="text" class="form-control" id="name" ng-model="vm.student.name">
+            </div>
+            <div class="form-group col-xs-6">
+                <label for="surname">{{vm.headers[3]}}</label>
+                <input type="text" class="form-control" id="surname" ng-model="vm.student.surname">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <label for="birthdate">{{vm.headers[4]}}</label>
+                <input type="text" class="form-control" id="birthdate" ng-model="vm.student.birthdate">
+            </div>
+            <div class="form-group col-xs-6">
+                <label for="gender">{{vm.headers[5]}}</label>
+                <input type="text" class="form-control" id="gender" ng-model="vm.student.gender">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label for="email">{{vm.headers[6]}}</label>
+                <input type="email" class="form-control" id="email" ng-model="vm.student.email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button id="button" type="submit" class="btn btn-success" ng-click="vm.saveStudent()">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span>&nbsp;&nbsp;Save</span>
+                </button>
+                <button id="button" type="submit" class="btn btn-default" ng-click="vm.initializeStudent()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span>&nbsp;&nbsp;Clear</span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div ng-show="vm.student.id">
+        <h3>Student Selected: {{vm.student.name + " " + vm.student.surname}}</h3>
+        <h3>Random Operation: {{vm.student.id * 40}}</h3>
+    </div>
+    <br/><br/>
+
+    <table class="table table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th scope="col" ng-repeat="header in vm.headers">{{header}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in vm.students">
+                <td>{{$index + 1}}</td>
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.surname}}</td>
+                <td>{{student.birthdate | date : "fullDate"}}</td>
+                <td>{{student.gender}}</td>
+                <td>{{student.email}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" ng-click="vm.modifyStudent(student)">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-xs hidden-sm">&nbsp;&nbsp;Edit</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteStudent($index)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <span class="hidden-xs hidden-sm">&nbsp;&nbsp;Delete</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

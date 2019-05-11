@@ -8,72 +8,17 @@
       <link href="app/img/favicon.ico" rel="shortcut icon">
   </head>
   <body>
-    <div ng-controller="NavbarController">
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">A menu</a>
-        </div>
-        <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
-            <ul class="nav navbar-nav" ng-repeat="element in navbarElements">
-                <li><a href="{{element.href}}">{{element.display}}</a></li>
-            </ul>
-        </div>
-      </nav>
-      <button ng-click="addNavbarElement()">Add element to Navbar!</button>
-      <button ng-click="emptyNavbar()">Empty navbar!</button>
-      <hr>
-    </div>
-    <div>
-      <div ng-controller="HelloWorldController">
-        <p>Hello world controller</p>
-        <label>Name:</label>
-        <input type="text" ng-model="name" placeholder="Enter a name here">
-        <hr>
-        <h1>Hello {{name}}!</h1>
-        <p>Old value: {{oldValueName}}</p>
-        <p>New value: {{newValueName}}</p>
+    <ui-view></ui-view>
 
-        {{time}}
-
-        <br/>
-        <button ng-click="updateTime()">update time - ng-click</button>
-        <button id="updateTimeButton">update time</button>
-  
-        <div ng-controller="HelloWorldParentController">
-          <p>Hello world parent controller</p>
-          <label>Name:</label>
-          <input type="text" ng-model="name" placeholder="Enter a name here">
-          <hr>
-          <h1>Hello {{name}}!</h1>
-          <button ng-click="greetHelloWorldParent()">Greet!</button>
-  
-          <div ng-controller="HelloWorldChildController">
-            <p>Hello world child controller</p>
-            <label>Name:</label>
-            <input type="text" ng-model="name" placeholder="Enter a name here">
-            <hr>
-            <h1>Hello {{name}}!</h1>
-            <button ng-click="greetHelloWorldChild()">Greet!</button>
-          </div>
-        </div>
-        <br><br>        
-        <h1>LOG:</h1>
-        <pre><code>{{logs.messages}}</code></pre>
-      </div>
-    </div>
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
     <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
-    <script src="app/js/navbar/navbar.js"></script>
-    <script src="app/js/navbar/providers/academikNavbarProvider.js"></script>
-    <script src="app/js/navbar/controllers/navbarController.js"></script>
-    <script src="app/js/app.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/js/controllers/helloWorld/helloWorldController.js"></script>
+    <script src="app/js/controllers/students/studentsController.js"></script>
+    <script src="app/js/modules/navbar/navbar.js"></script>
+    <script src="app/js/modules/navbar/providers/academikNavbarProvider.js"></script>
   </body>
 </html>

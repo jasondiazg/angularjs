@@ -7,7 +7,6 @@
         var $navbarElements = [];
     
         this.setNavbarElements = (elements) => {
-            console.log("Configuring navbar...");
             $navbarElements = elements;
         };
 
