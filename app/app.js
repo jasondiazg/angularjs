@@ -14,8 +14,7 @@
                     abstract: true,
                     templateUrl: 'app/app.html',
                     controller: 'AppController',
-                    controllerAs: 'vm',
-                    data: { }
+                    controllerAs: 'vm'
                 }
             },
             {

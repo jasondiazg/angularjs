@@ -29,7 +29,7 @@
                 ];
 
                 vm.students.forEach(student => student.id = getRandomId());
-                localStorage.setItem("students", JSON.stringify(vm.students));
+                saveData();
             }
         }
 
@@ -46,15 +46,17 @@
         }
 
         vm.saveStudent = () => {
-            vm.student.birthdate = new Date(vm.student.birthdate);
-            if (vm.student.id) {
-                vm.students.forEach(student => { if (student.id == vm.student.id) student = vm.student; });
-            } else {
-                vm.student.id = getRandomId();
-                vm.students.push(vm.student);
+            vm.student.birthdate = vm.student.birthdate ? new Date(vm.student.birthdate) : new Date();
+            if (vm.student.name && vm.student.surname && vm.student.gender && vm.student.email) {
+                if (vm.student.id) {
+                    vm.students.forEach(student => { if (student.id == vm.student.id) student = vm.student; });
+                } else {
+                    vm.student.id = getRandomId();
+                    vm.students.push(vm.student);
+                }
+                saveData();
+                vm.initializeStudent();    
             }
-            saveData();
-            vm.initializeStudent();
         }
 
         vm.modifyStudent = (student) => {
@@ -64,6 +66,7 @@
 
         vm.deleteStudent = (index) => {
             vm.students.splice(index, 1);
+            saveData();
         }
 
         setDefaults();
