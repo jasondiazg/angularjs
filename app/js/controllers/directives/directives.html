@@ -1,0 +1,229 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>AngularJS Directives</h1>
+        <p>Examples to use AngularJS Directives in your HTML templates.</p>
+    </div>
+</div>
+
+<div class="container">
+    <div id="ng-init" ng-init="myVar = 8">
+        <h3><code>ng-init</code></h3>
+        <div ng-repeat="innerList in vm.list" ng-init="outerIndex = $index">
+            <div ng-repeat="value in innerList" ng-init="innerIndex = $index">
+                <span class="example-init">list[ {{outerIndex}} ][ {{innerIndex}} ] = {{value}};</span>
+            </div>
+        </div>
+        {{myVar}}
+    </div>
+    
+    <br/><br/>
+
+    <div id="ng-init-ng-class" ng-init="myVar = 8">
+        <h3><code>ng-repeat</code> && <code>ng-class</code></h3>
+        <table class="table table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col" ng-repeat="header in vm.fruitHeaders">{{header}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="fruit in vm.fruits"
+                    ng-class="fruit.selected ? 'green' : fruit.color"
+                    ng-click="fruit.selected = !fruit.selected"
+                    ng-dblclick="vm.selectDeselectAll()"
+                    ng-class-odd="'italic'"
+                    ng-class-even="'bold'">
+
+                    <td>$index: {{$index}}</td>
+                    <td>$first: {{$first}}</td>
+                    <td>$middle: {{$middle}}</td>
+                    <td>$last: {{$last}}</td>
+                    <td>$even: {{$even}}</td>
+                    <td>$odd: {{$odd}}</td>
+                    <td>Name: {{fruit.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br/><br/>
+    
+    <div id="ng-include-ng-switch">
+        <h3><code>ng-include</code> && <code>ng-switch</code></h3>
+        <select ng-model="vm.template" ng-options="t.name for t in vm.templates">
+            <option value="">none</option>
+        </select>
+        URL of the template: <code>{{vm.template.url}}</code>
+        <hr/>
+        <div class="slide-animate-container">
+            <div class="slide-animate" ng-include="vm.template.url"></div>
+        </div>
+        <br/>
+
+        <div class="slide-animate-container" ng-switch on="vm.template.name">
+            <div class="slide-animate" ng-switch-when="template1.html">
+                You have chosen the template1
+            </div>
+            <div class="slide-animate" ng-switch-when="template2.html">
+                You have chosen the template2
+            </div>
+            <div class="slide-animate" ng-switch-default>
+                Default option
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div id="ng-if-ng-show-ng-hide">
+        <h3><code>ng-if</code> && <code>ng-show</code> && <code>ng-hide</code></h3>
+        <button ng-click="vm.ifShowHide = !vm.ifShowHide" class="btn btn-primary">Click me!</button>
+        <div ng-if="vm.ifShowHide"><h2>Content inside ng-if</h2></div>
+        <div ng-show="vm.evaluateIfShowHide()"><h2>Content inside ng-show</h2></div>
+        <div ng-hide="vm.ifShowHide"><h2>Content inside ng-hide</h2></div>
+    </div>
+
+    <br/><br/>
+
+    <div id="ng-checked-ng-selected-ng-readonly">
+        <h3><code>ng-checked</code> && <code>ng-selected</code> && <code>ng-readonly</code></h3>
+        <input type="checkbox" ng-model="vm.allCheckboxSelected">Select all
+        <input type="checkbox" ng-model="vm.checkbox1" ng-checked="vm.allCheckboxSelected">Checkbox 1
+        <input type="checkbox" ng-model="vm.checkbox2" ng-checked="vm.allCheckboxSelected">Checkbox 2
+        <input type="checkbox" ng-model="vm.checkbox3" ng-checked="vm.allCheckboxSelected">Checkbox 3
+        
+        Check all and select one
+        <select>
+            <option>None</option>
+            <option ng-selected="vm.allCheckboxSelected">All checkbox are selected!</option>
+        </select>
+
+        Check all and set readonly
+        <input type="text" ng-readonly="vm.allCheckboxSelected" value="I'm a input with ng-readonly"/>
+    </div>
+
+    <br/><br/>
+
+    <div id="ng-required-ng-maxlenght-minlength" class="row">
+        <h3><code>ng-checked</code> && <code>ng-maxlenght</code> && <code>ng-minlength</code></h3>
+
+        <form name="form">
+            <div class="form-group col-xs-6">
+                <label for="max-length">Max-length</label>
+                <input type="number" class="form-control" id="max-length" ng-model="vm.maxLength"/>
+            </div>
+            <div class="form-group col-xs-6">
+                <label for="min-length">Min-length</label>
+                <input type="number" class="form-control" id="min-length" ng-model="vm.minLength"/>
+            </div>
+            <div class="form-group col-xs-6 checkbox">
+                <label><input type="checkbox" ng-model="vm.required">Required</label>
+                <label><input type="checkbox" ng-model="vm.disabled">Disabled</label>
+            </div>
+            <div class="form-group col-xs-6">
+                <label>Type</label>
+                <select ng-model="vm.type">
+                    <option ng-repeat="type in vm.inputTypes">{{type}}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <label for="my-input">My input</label>
+                <input type="{{vm.type}}" class="form-control" id="input" ng-model="vm.myInput" 
+                    ng-required="vm.required" ng-minlength="vm.minLength" ng-maxlength="vm.maxLength"
+                    ng-disabled="vm.disabled"/>
+
+                <div class="error-validation" ng-show="form.$error.required">The field my input is required</div>
+                <div class="error-validation" ng-show="form.$error.minlength">The min length of my input is {{vm.minLength}}</div>
+                <div class="error-validation" ng-show="form.$error.maxlength">The max length of my input is {{vm.maxLength}}</div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <label for="my-input">My email</label>
+                <input type="email" class="form-control" id="input" ng-model="vm.myEmail" 
+                    ng-required="vm.required" ng-minlength="vm.minLength" ng-maxlength="vm.maxLength"
+                    ng-disabled="vm.disabled"/>
+
+                <div class="error-validation" ng-show="form.$error.email">It isn't a valid email</div>
+            </div>
+
+        </form>
+    </div>
+
+    <br/><br/>
+
+    <div id="events">
+        <h3><code>ng-events</code></h3>
+
+        <div class="form-group col-xs-12">
+            <label for="inputEvent">Events: click, dblclick & change</label>
+            <input type="text" class="form-control" id="inputEvent1" ng-model="vm.inputEvent1"
+                ng-click="vm.fireEvent('click')" ng-dblclick="vm.fireEvent('dblclick')"
+                ng-change="vm.fireEvent('change')"/>
+        </div>
+
+        <div class="form-group col-xs-12">
+            <label for="inputEvent">Events: copy, paste & cut</label>
+            <textarea type="text" class="form-control" id="inputEvent2" ng-model="vm.inputEvent2"
+                ng-copy="vm.fireEvent('copy')" ng-cut="vm.fireEvent('cut')" 
+                ng-paste="vm.fireEvent('paste')">
+            </textarea>
+        </div>
+
+        <div class="form-group col-xs-12">
+            <label for="inputEvent">Events: focus, blur & key up</label>
+            <input type="text" class="form-control" id="inputEvent3" ng-model="vm.inputEvent3"
+                ng-focus="vm.fireEvent('focus')" ng-keyup="vm.fireEvent('key up')" 
+                ng-blur="vm.fireEvent('blur')"/>
+        </div>
+
+        <div class="form-group col-xs-12">
+            <label for="inputEvent">Events: focus & key down</label>
+            <input type="text" class="form-control" id="inputEvent4" ng-model="vm.inputEvent4"
+                ng-focus="vm.fireEvent('focus')" ng-keydown="vm.fireEvent('key down')" />
+        </div>
+        <br/><br/><br/><br/>
+
+    </div>
+
+    <div id="mouse-events">
+        <h3><code>ng-mouse-events</code></h3>
+        <button
+            ng-mousedown="vm.countMouseDown = vm.countMouseDown + 1"
+            ng-init="vm.countMouseDown=0">
+            Increment (on mouse down)
+        </button>
+        count: {{vm.countMouseDown}}
+        <button
+            ng-mouseup="vm.countMouseUp = vm.countMouseUp + 1"
+            ng-init="vm.countMouseUp=0">
+            Increment (on mouse up)
+        </button>
+        count: {{vm.countMouseUp}}
+        <br/><br/>
+
+        <div class="col-xs-6 eventContainer"
+            ng-mouseenter="vm.fireEvent('mouse-enter')">
+            <br/><br/><br/><br/><br/>
+        </div>
+        <div class="col-xs-6 eventContainer"
+            ng-mouseleave="vm.fireEvent('mouse-leave')">
+            <br/><br/><br/><br/><br/>
+        </div>
+        <br/><br/>
+        <div class="col-xs-6 eventContainer"
+            ng-mouseover="vm.fireEvent('mouse-over')">
+            <br/><br/><br/><br/><br/>
+        </div>
+        <div class="col-xs-6 eventContainer"
+            ng-mousemove="vm.fireEvent('mouse-move')">
+            <br/><br/><br/><br/><br/>
+        </div>
+    </div>
+
+
+    <br/><br/>
+
+</div>
+
+<br/><br/>

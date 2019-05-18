@@ -35,6 +35,16 @@
                     controller: 'StudentsController',
                     controllerAs: 'vm',
                 }
+            },
+            {
+                name: 'app.directives',
+                options: {
+                    title: 'AngularJS Directives',
+                    url: '/directives',
+                    templateUrl: 'app/js/controllers/directives/directives.html',
+                    controller: 'DirectivesController',
+                    controllerAs: 'vm',
+                }
             }
         ];
 
