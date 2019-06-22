@@ -9,15 +9,15 @@ div[ng-controller] {
 }
 
 .red {
-  background-color: red;
+  background-color: #FF0130;
 }
 
 .orange {
-  background-color: orange;
+  background-color: #FF8B00;
 }
 
 .purple {
-  background-color: purple;
+  background-color: #E429F2;
 }
 
 .pink {
@@ -25,11 +25,11 @@ div[ng-controller] {
 }
 
 .blue {
-  background-color: blue;
+  background-color: #266EF6;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #FFD300;
 }
 
 .white {
@@ -37,7 +37,7 @@ div[ng-controller] {
 }
 
 .green {
-  background-color: lightgreen;
+  background-color: #12E772;
 }
 
 .italic {

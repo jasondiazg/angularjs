@@ -1,0 +1,119 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>Filters</h1>
+        <p>Filters in AngularJS.</p>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Search infinity stones with filter</h1>
+    <label>Search: <input ng-model="vm.search.$"></label> <br>
+
+    <table class="table table-stripped">
+        <tr>
+            <th>Name</th>
+            <th>Color</th>
+        </tr>
+        <tr>
+            <th><input ng-model="vm.search.name"></th>
+            <th><input ng-model="vm.search.color"></th>
+        </tr>
+        <tr ng-repeat="infinityStone in vm.infinityStones | filter:vm.search" ng-class="infinityStone.color">
+            <td>{{infinityStone.name}}</td>
+            <td>{{infinityStone.color}}</td>
+        </tr>
+    </table>
+
+    <br /><br />
+
+    <h1>Filter currency</h1>
+    <label>Amount:
+        <input type="number" ng-model="vm.amount">
+    </label><br />
+    <label>Exchange rate:
+        <input type="number" ng-model="vm.exchangeRate" />
+    </label><br />
+
+    Default currency symbol ($): <span>{{vm.amount | currency}}</span><br>
+    Custom currency identifier (GTQ): <span>{{vm.amount * (vm.exchangeRate) | currency:"Q"}}</span><br>
+    No fractions (0): <span>{{vm.amount * (vm.exchangeRate) | currency:"Q":0}}</span><br /><br />
+
+
+    <h1>Filter Number</h1>
+    <label>Number :
+        <input type="number" ng-model="vm.number" />
+    </label><br />
+
+    Default formatting: <span id='number-default'>{{vm.number | number}}</span><br>
+    No fractions: <span>{{vm.number | number:0}}</span><br>
+    four decimal points: <span>{{vm.number | number:4}}</span><br>
+    Negative number: <span>{{-vm.number | number}}</span><br /><br />
+
+
+    <h1>Filter Date</h1>
+    <span><strong>short: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'short'}}</span><br>
+    <span><strong>medium: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'medium'}}</span><br>
+    <span><strong>fullDate: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'fullDate'}}</span><br>
+    <span><strong>longDate: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'longDate'}}</span><br>
+    <span><strong>mediumDate: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'mediumDate'}}</span><br>
+    <span><strong>shortDate: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'shortDate'}}</span><br>
+    <span><strong>mediumTime: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'mediumTime'}}</span><br>
+    <span><strong>shortTime: </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'shortTime'}}</span><br>
+    <span><strong>yyyy-MM-dd HH:mm:ss Z </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</span><br>
+    <span><strong>MM/dd/yyyy @ h:mma </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:'MM/dd/yyyy @ h:mma'}}</span><br>
+    <span><strong>MM-dd-yyyy 'at' h:mma </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:"MM-dd-yyyy 'at' h:mma"}}</span><br>
+    <span><strong>dd/MM/yyyy ' ' h:mma </strong>&nbsp;&nbsp;&nbsp;{{vm.currentDate | date:"dd/MM/yyyy ' ' h:mma"}}</span><br>
+
+    
+    <h1>Filter JSON</h1>
+    <label>Default filter json: </label>
+    <pre>{{ {'name':'AngularJS', 'type': 'Frontend Language'} | json }}</pre>
+    
+    <label>Filter json with 8 spaces per indentation:</label>
+    <pre>{{ {'name':'Java', 'type': 'Backend Language'} | json:8 }}</pre>
+
+    <h1>Filter uppercase</h1>
+    <label>lowercase text -> {{'lowercase text' | uppercase}}</label>
+
+    <h1>Filter lowercase</h1>
+    <label>UPPERCASE TEXT -> {{'UPPERCASE TEXT' | lowercase}}</label>
+
+    <h1>Filter lowercase -> uppercase</h1>
+    <label>Original Text -> {{'Original Text' | lowercase | uppercase}}</label>
+
+    <h1>Filter limit to</h1>
+    <label>
+        Limit {{vm.numbers}} to:
+        <input type="number" step="1" ng-model="vm.numLimit">
+    </label>
+    <p>Output numbers: {{ vm.numbers | limitTo:vm.numLimit }}</p>
+    <label>
+        Limit {{vm.letters}} to:
+        <input type="vm.number" step="1" ng-model="vm.letterLimit">
+    </label>
+    <p>Output letters: {{ vm.letters | limitTo:vm.letterLimit }}</p>
+    <label>
+        Limit {{vm.longNumber}} to:
+        <input type="vm.number" step="1" ng-model="vm.longNumberLimit">
+    </label>
+    <p>Output long number: {{ vm.longNumber | limitTo:vm.longNumberLimit }}</p>
+
+    <h1>Ordinal filter</h1>
+    <label>1 -> {{1 | ordinal}}</label><br/>
+    <label>2 -> {{2 | ordinal}}</label><br/>
+    <label>3 -> {{3 | ordinal}}</label><br/>
+    <label>Four -> {{'Four' | ordinal}}</label><br/>
+    <label>7897515 -> {{7897515 | ordinal}}</label><br/>
+    <label>16 -> {{16 | ordinal}}</label><br/>
+    <label>157 -> {{157 | ordinal}}</label><br/>
+    <label>-8 -> {{-8 | ordinal}}</label><br/>
+
+    <h1>DPI filter</h1>
+    <label>210411240504 -> {{210411240504 | dpi}}</label><br/>
+    <label>2345114240312 -> {{2345114240312 | dpi}}</label><br/>
+    <label>21040504 -> {{21040504 | dpi}}</label><br/>
+    <label>2104-11424-0304 -> {{"2104-11424-0304" | dpi}}</label><br/>
+    <label>#210411240504 -> {{"#210411240504" | dpi}}</label><br/>
+    <label>21041142403.04 -> {{21041142403.04 | dpi}}</label><br/>
+    <label>"text" -> {{"text" | dpi}}</label><br/>
+</div>

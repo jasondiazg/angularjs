@@ -39,10 +39,20 @@
             {
                 name: 'app.directives',
                 options: {
-                    title: 'AngularJS Directives',
+                    title: 'Directives',
                     url: '/directives',
                     templateUrl: 'app/js/controllers/directives/directives.html',
                     controller: 'DirectivesController',
+                    controllerAs: 'vm',
+                }
+            },
+            {
+                name: 'app.filters',
+                options: {
+                    title: 'Filters',
+                    url: '/filters',
+                    templateUrl: 'app/js/controllers/filters/filters.html',
+                    controller: 'FiltersController',
                     controllerAs: 'vm',
                 }
             }

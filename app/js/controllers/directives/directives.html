@@ -9,6 +9,7 @@
     <div id="ng-init" ng-init="myVar = 8">
         <h3><code>ng-init</code></h3>
         <div ng-repeat="innerList in vm.list" ng-init="outerIndex = $index">
+            {{innerList}}
             <div ng-repeat="value in innerList" ng-init="innerIndex = $index">
                 <span class="example-init">list[ {{outerIndex}} ][ {{innerIndex}} ] = {{value}};</span>
             </div>
@@ -18,7 +19,7 @@
     
     <br/><br/>
 
-    <div id="ng-init-ng-class" ng-init="myVar = 8">
+    <div id="ng-repeat-ng-class">
         <h3><code>ng-repeat</code> && <code>ng-class</code></h3>
         <table class="table table-condensed table-responsive">
             <thead>
@@ -33,6 +34,11 @@
                     ng-dblclick="vm.selectDeselectAll()"
                     ng-class-odd="'italic'"
                     ng-class-even="'bold'">
+                    
+                    <!-- other uses of ng-class 
+                        ng-class="vm.getFruitClass(fruit)"
+                        ng-class="vm.fruitClass" 
+                    -->
 
                     <td>$index: {{$index}}</td>
                     <td>$first: {{$first}}</td>
@@ -40,7 +46,7 @@
                     <td>$last: {{$last}}</td>
                     <td>$even: {{$even}}</td>
                     <td>$odd: {{$odd}}</td>
-                    <td>Name: {{fruit.name}}</td>
+                    <td>{{fruit.name}}</td>
                 </tr>
             </tbody>
         </table>
@@ -227,3 +233,8 @@
 </div>
 
 <br/><br/>
+
+
+<div ng-class="vm.myClass">
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</div>

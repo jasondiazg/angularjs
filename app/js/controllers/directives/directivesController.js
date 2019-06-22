@@ -7,6 +7,7 @@
 
         let setDefaults = () => {
             vm.list = [["a", "b"], ["c", "d"]];
+            vm.fruitHeaders = ["$index", "$first", "$middle", "$last", "$even", "$odd", "name"]
             vm.fruits = [
                 { name: "apple", color: "red" },
                 { name: "orange", color: "orange" },
@@ -30,6 +31,42 @@
             vm.type = "email";
 
             vm.inputEvent2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+            vm.make = [
+                {
+                    name: "Toyota", 
+                    models: [
+                                { name: "Yaris" },
+                                { name: "Agya" },
+                                { name: "Corolla" }
+                    ]
+                },
+                {
+                    name: "Honda", 
+                    models: [
+                                { name: "Civic" },
+                                { name: "City" },
+                                { name: "Accord" }
+                    ]
+                },
+                {
+                    name: "Mazda", 
+                    models: [
+                                { name: "m2" },
+                                { name: "m3" },
+                                { name: "m6" }
+                    ]
+                }
+            ];
+
+            vm.make.forEach(make => {
+                make.models.forEach (model => {
+                    console.log("make: " + make.name + ", model: " + model.name);
+                });
+            });
+
+            vm.myClass = "green";
+
         }
 
         let getRandomType = () => {
@@ -55,6 +92,16 @@
 
             toast({ type: getRandomType(), title: "You have fired the " + typeEvent + " event..." });
         }
+
+        vm.getFruitClass = (fruit) => {
+            if (fruit.selected) {
+                return "green";
+            } else {
+                return fruit.color
+            }
+        }
+
+        vm.fruitClass = "green";
 
         setDefaults();
     });
