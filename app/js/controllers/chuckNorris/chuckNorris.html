@@ -1,0 +1,53 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>Chuck Norris Jokes</h1>
+        <p>Services examples in AngularJS.</p>
+    </div>
+</div>
+<div class="container">
+    <button ng-click="vm.delayFunction()">Check your logs...</button>
+    <button ng-click="vm.changeUrl()">Change url...</button>
+    <label>Your url is {{vm.url}}</label> <br /><br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group col-xs-10">
+                <label class="col-sm-2 control-label" for="search-text">Search</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="search-text" placeholder="Search"
+                        ng-model="vm.searchText">
+                </div>
+            </div>
+            <button type="button" class="btn btn-success col-xs-2" ng-click="vm.getJokeByQuery()">Search Joke</button>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" ng-click="vm.getRandomJoke()">Get Random Joke</button>
+                <button type="button" class="btn btn-primary" ng-click="vm.getJokeByCategory()">Get Joke by
+                    Category</button>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <select ng-model="vm.category" ng-options="t for t in vm.categories" class="pull-right form-control">
+                <option value="">none</option>
+            </select>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th scope="col" ng-repeat="header in vm.headers">{{header}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="joke in vm.jokes">
+                <td>{{$index + 1}}</td>
+                <td>{{joke.value}}</td>
+                <td>{{joke.categories | array2txt }}</td>
+                <td>{{joke.created_at}}</td>
+                <td>{{joke.updated_at}}</td>
+                <td><img ng-src="{{joke.icon_url}}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

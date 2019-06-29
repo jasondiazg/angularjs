@@ -37,6 +37,7 @@
     Default currency symbol ($): <span>{{vm.amount | currency}}</span><br>
     Custom currency identifier (GTQ): <span>{{vm.amount * (vm.exchangeRate) | currency:"Q"}}</span><br>
     No fractions (0): <span>{{vm.amount * (vm.exchangeRate) | currency:"Q":0}}</span><br /><br />
+    No fractions (0): <span>{{vm.amount * (vm.exchangeRate) | currency:"Q":6}}</span><br /><br />
 
 
     <h1>Filter Number</h1>
@@ -114,6 +115,6 @@
     <label>21040504 -> {{21040504 | dpi}}</label><br/>
     <label>2104-11424-0304 -> {{"2104-11424-0304" | dpi}}</label><br/>
     <label>#210411240504 -> {{"#210411240504" | dpi}}</label><br/>
-    <label>21041142403.04 -> {{21041142403.04 | dpi}}</label><br/>
+    <label>2104114253.04 -> {{2104114253.04 | dpi}}</label><br/>
     <label>"text" -> {{"text" | dpi}}</label><br/>
 </div>

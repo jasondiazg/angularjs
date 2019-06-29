@@ -55,6 +55,16 @@
                     controller: 'FiltersController',
                     controllerAs: 'vm',
                 }
+            },
+            {
+                name: 'app.services',
+                options: {
+                    title: 'Services',
+                    url: '/services',
+                    templateUrl: 'app/js/controllers/chuckNorris/chuckNorris.html',
+                    controller: 'ChuckNorrisController',
+                    controllerAs: 'vm',
+                }
             }
         ];
 
