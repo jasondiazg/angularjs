@@ -6,11 +6,11 @@
         let vm = this;
 
         let setDefaults = () => {
+            setHeaders();
             loadData();
         }
 
         let loadData = () => {
-            vm.headers = ["#", "Joke", "Categories", "Created", "Updated", "Icon"];
             loadSimpleJoke();
             loadCategories();
             vm.getRandomJoke();
@@ -18,8 +18,13 @@
             vm.url = $location.absUrl();
         }
 
+        let setHeaders = () => {
+            vm.headers = ["#", "Joke", "Categories", "Created", "Updated", "Icon"];
+        }
+
         let loadSimpleJoke = () => {
-            $http({ method: "GET", url: "https://api.chucknorris.io/jokes/random" }).then((response) => { console.log(response); }, (error) => { console.error(error); });
+            $http({ method: "GET", url: "https://api.chucknorris.io/jokes/random" })
+                .then((response) => { console.log(response); }, (error) => { console.error(error); });
         }
 
         let loadCategories = () => {

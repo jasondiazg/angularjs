@@ -1,69 +1,79 @@
 (() => {
     'use strict';
-    let mainModule = angular.module("academik", ["ui.router","academik.navbar"]);
+    let mainModule = angular.module("academik", ["ui.router", "academik.navbar"]);
 
-    let mainModuleConfiguration = ($stateProvider, $locationProvider, $urlRouterProvider, $academikNavbarProvider) => {
+    let mainModuleConfiguration = ($stateProvider, $locationProvider, $urlRouterProvider, $academikNavbarProvider, greet, $loggerProvider) => {
         $locationProvider.html5Mode(false);
-        $urlRouterProvider.otherwise('/app/hello-world');
+        $urlRouterProvider.otherwise("/app/hello-world");
 
         let states = [
             {
-                name: 'app',
+                name: "app",
                 options: {
-                    url: '/app',
+                    url: "/app",
                     abstract: true,
-                    templateUrl: 'app/app.html',
-                    controller: 'AppController',
-                    controllerAs: 'vm'
+                    templateUrl: "app/app.html",
+                    controller: "AppController",
+                    controllerAs: "vm"
                 }
             },
             {
-                name: 'app.helloWorld',
+                name: "app.helloWorld",
                 options: {
-                    title: 'Hello World Angular JS',
-                    url: '/hello-world',
-                    templateUrl: 'app/js/controllers/helloWorld/helloWorld.html',
-                    controller: 'HelloWorldController'
+                    title: "Hello World Angular JS",
+                    url: "/hello-world",
+                    templateUrl: "app/js/controllers/helloWorld/helloWorld.html",
+                    controller: "HelloWorldController"
                 }
             },
             {
-                name: 'app.students',
+                name: "app.students",
                 options: {
-                    title: 'Students CRUD',
-                    url: '/students',
-                    templateUrl: 'app/js/controllers/students/students.html',
-                    controller: 'StudentsController',
-                    controllerAs: 'vm',
+                    title: "Students CRUD",
+                    url: "/students",
+                    templateUrl: "app/js/controllers/students/students.html",
+                    controller: "StudentsController",
+                    controllerAs: "vm",
                 }
             },
             {
-                name: 'app.directives',
+                name: "app.directives",
                 options: {
-                    title: 'Directives',
-                    url: '/directives',
-                    templateUrl: 'app/js/controllers/directives/directives.html',
-                    controller: 'DirectivesController',
-                    controllerAs: 'vm',
+                    title: "Directives",
+                    url: "/directives",
+                    templateUrl: "app/js/controllers/directives/directives.html",
+                    controller: "DirectivesController",
+                    controllerAs: "vm",
                 }
             },
             {
-                name: 'app.filters',
+                name: "app.filters",
                 options: {
-                    title: 'Filters',
-                    url: '/filters',
-                    templateUrl: 'app/js/controllers/filters/filters.html',
-                    controller: 'FiltersController',
-                    controllerAs: 'vm',
+                    title: "Filters",
+                    url: "/filters",
+                    templateUrl: "app/js/controllers/filters/filters.html",
+                    controller: "FiltersController",
+                    controllerAs: "vm",
                 }
             },
             {
-                name: 'app.services',
+                name: "app.chuckNorrisApi",
                 options: {
-                    title: 'Services',
-                    url: '/services',
-                    templateUrl: 'app/js/controllers/chuckNorris/chuckNorris.html',
-                    controller: 'ChuckNorrisController',
-                    controllerAs: 'vm',
+                    title: "Chuck Norris Api",
+                    url: "/chuck-norris",
+                    templateUrl: "app/js/controllers/chuckNorris/chuckNorris.html",
+                    controller: "ChuckNorrisController",
+                    controllerAs: "vm",
+                }
+            },
+            {
+                name: "app.calculator",
+                options: {
+                    title: "Calculator",
+                    url: "/calculator",
+                    templateUrl: "app/js/controllers/calculator/calculator.html",
+                    controller: "CalculatorController",
+                    controllerAs: "vm",
                 }
             }
         ];
@@ -71,38 +81,45 @@
         states.forEach(state => $stateProvider.state(state.name, state.options));
 
         // $stateProvider
-        //     .state('app', {
-        //         url: '/app',
+        //     .state("app", {
+        //         url: "/app",
         //         abstract: true,
-        //         templateUrl: 'app/app.html',
-        //         controller: 'AppController',
-        //         controllerAs: 'vm',
+        //         templateUrl: "app/app.html",
+        //         controller: "AppController",
+        //         controllerAs: "vm",
         //         data: { }
         //     })
-        //     .state('app.helloWorld', {
-        //         title: 'Hello World Angular JS',
-        //         url: '/hello-world',
-        //         templateUrl: 'app/js/controllers/helloWorld/helloWorld.html',
-        //         controller: 'HelloWorldController'
+        //     .state("app.helloWorld", {
+        //         title: "Hello World Angular JS",
+        //         url: "/hello-world",
+        //         templateUrl: "app/js/controllers/helloWorld/helloWorld.html",
+        //         controller: "HelloWorldController"
         //     })
-        //     .state('app.students', {
-        //         title: 'Students CRUD',
-        //         url: '/students',
-        //         templateUrl: 'app/js/controllers/student.html',
-        //         controller: 'StudentController'
+        //     .state("app.students", {
+        //         title: "Students CRUD",
+        //         url: "/students",
+        //         templateUrl: "app/js/controllers/student.html",
+        //         controller: "StudentController"
         //     });
 
         $academikNavbarProvider.setNavbarElements(states);
+        console.log(greet);
+
+        $loggerProvider.setLogLevel("QA");
     };
 
     mainModule.config(mainModuleConfiguration);
-    mainModuleConfiguration.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider', '$academikNavbarProvider'];
+    mainModuleConfiguration.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider", "$academikNavbarProvider", "greet", "$loggerProvider"];
 
-    mainModule.run(() => {
+    let runFunction = (greet, greetValue) => {
+        console.log(greetValue);
+        console.log(greet);
+    }
 
-    });
+    mainModule.run(runFunction);
+    runFunction.$inject = ["greet", "greetValue"];
 
-    mainModule.controller("AppController", function($academikNavbar) {
+    mainModule.controller("AppController", function ($academikNavbar) {
         let vm = this;
 
         vm.isNavCollapsed = true;

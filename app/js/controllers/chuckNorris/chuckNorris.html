@@ -17,12 +17,12 @@
                         ng-model="vm.searchText">
                 </div>
             </div>
-            <button type="button" class="btn btn-success col-xs-2" ng-click="vm.getJokeByQuery()">Search Joke</button>
+            <button type="button" class="btn btn-success col-xs-2" ng-click="vm.getJokeByQuery()" ng-disabled="!vm.searchText">Search Joke</button>
         </div>
         <div class="col-xs-12 col-sm-9">
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-default" ng-click="vm.getRandomJoke()">Get Random Joke</button>
-                <button type="button" class="btn btn-primary" ng-click="vm.getJokeByCategory()">Get Joke by
+                <button type="button" class="btn btn-primary" ng-click="vm.getJokeByCategory()" ng-disabled="!vm.category">Get Joke by
                     Category</button>
             </div>
         </div>

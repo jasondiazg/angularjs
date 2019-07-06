@@ -1,0 +1,44 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>Calculator</h1>
+        <p>Services examples in AngularJS.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group col-xs-12 col-sm-6">
+                <label class="col-sm-2 control-label" for="operator1">Operator1</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="operator2" placeholder="Operator 1"
+                        ng-model="vm.operator1">
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-sm-6">
+                <label class="col-sm-2 control-label" for="operator1">Operator2</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="operator2" placeholder="Operator 2"
+                        ng-model="vm.operator2">
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="col-sm-2 control-label" for="radio">Radio</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="radio" placeholder="Radio"
+                        ng-model="vm.radio">
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" ng-disabled="!(vm.operator1 && vm.operator2)" ng-click="vm.sum()">Sum</button>
+                    <button type="button" class="btn btn-default" ng-disabled="!(vm.operator1 && vm.operator2)" ng-click="vm.subs()">Substraction</button>
+                    <button type="button" class="btn btn-default" ng-disabled="!(vm.operator1 && vm.operator2)" ng-click="vm.multiplication()">Multiplication</button>
+                    <button type="button" class="btn btn-default" ng-disabled="!(vm.operator1 && vm.operator2)" ng-click="vm.division()">Division</button>
+                    <button type="button" class="btn btn-default" ng-disabled="!vm.operator1" ng-click="vm.pow()">Pow</button>
+                    <button type="button" class="btn btn-default" ng-disabled="!vm.radio" ng-click="vm.getRadio()">Circle Area</button>
+                </div>
+                <h1>The result es {{vm.result}}</h1>
+        </div>
+    </div>
+    <br /><br />
+</div>

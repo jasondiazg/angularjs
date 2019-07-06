@@ -3,17 +3,11 @@
 
     var module = angular.module("academik");
 
-    module.service("$chuckNorrisService", function($http) {
-        let url = "https://api.chucknorris.io/jokes";
-        let random = "/random";
-        let categories = "/categories";
-        let categoryParam = "?category=";
-        let query = "/search?query=";
-
+    module.service("$chuckNorrisService", function($http, urls) {
         let buildConfig = (options) => {
             let config = {
                 method: "GET",
-                url: url,
+                url: urls.chuckNorrisApi.baseUrl,
             };
 
             if (options.method) {
@@ -28,22 +22,22 @@
         }
 
         this.getRandomJoke = (actionSuccess, actionError) => {
-            let config = buildConfig({ urlComplement: random });
+            let config = buildConfig({ urlComplement: urls.chuckNorrisApi.random });
             $http(config).then(actionSuccess, actionError);
         }
 
         this.getCategories = (actionSuccess, actionError) => {
-            let config = buildConfig({ urlComplement: categories });
+            let config = buildConfig({ urlComplement: urls.chuckNorrisApi.categories });
             $http(config).then(actionSuccess, actionError);
         }
 
         this.getJokeByCategory = (category, actionSuccess, actionError) => {
-            let config = buildConfig({ urlComplement: random + categoryParam + category });
+            let config = buildConfig({ urlComplement: urls.chuckNorrisApi.random + urls.chuckNorrisApi.categoryParam + category });
             $http(config).then(actionSuccess, actionError);
         }
 
         this.getJokeByQuery = (searchText, actionSuccess, actionError) => {
-            let config = buildConfig({ urlComplement: query + searchText });
+            let config = buildConfig({ urlComplement: urls.chuckNorrisApi.query + searchText });
             $http(config).then(actionSuccess, actionError);
         }
 
