@@ -25,7 +25,7 @@
         },
         pokeApi: {
             baseUrl: "https://pokeapi.co/api/v2",
-            pokemo: "/pokemon",
+            pokemon: "/pokemon",
             type: "/type",
             ability: "/ability"
         },

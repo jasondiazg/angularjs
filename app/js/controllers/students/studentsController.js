@@ -2,59 +2,42 @@
     'use strict';
     let mainModule = angular.module("academik");
 
-    mainModule.controller("StudentsController", function() {
+    mainModule.controller("StudentsController", function(EntityService) {
         let vm = this;
+        let entityService;
 
         let setDefaults = () => {
+            entityService = new EntityService("student");
             loadData();
             vm.initializeStudent();
         }
 
         let loadData = () => {
-            vm.headers = JSON.parse(localStorage.getItem("headers-student"));
-            vm.students = JSON.parse(localStorage.getItem("students"));
+            loadHeaders();
+            loadStudents();            
+        }
 
-            if (!vm.headers) {
-                vm.headers = ["Order", "Id", "Name", "Surname", "Birthdate", "Gender", "Email", "Actions"];
-                localStorage.setItem("headers-student", JSON.stringify(vm.headers));
-            }
+        let loadHeaders = () => {
+            vm.headers = entityService.loadHeaders();
+        }
 
-            if (!vm.students) {
-                vm.students = [
-                    { name: "Pedro", surname: "Martinez", birthdate: new Date("05/08/1988"), gender: "Male", email: "pedro.martinez@gmail.com" },
-                    { name: "Luis", surname: "Alvarez", birthdate: new Date("03/04/1985"), gender: "Male", email: "luis.alvarez@gmail.com" },
-                    { name: "María", surname: "Hernandez", birthdate: new Date("09/07/1993"), gender: "Female", email: "maria.hernandez@gmail.com" },
-                    { name: "Sergio", surname: "Ochoa", birthdate: new Date("11/10/1989"), gender: "Male", email: "sergio.ochoa@gmail.com" },
-                    { name: "Elizabeth", surname: "Duarte", birthdate: new Date("09/04/1992"), gender: "Female", email: "elizabeth.duarte@gmail.com" }
-                ];
-
-                vm.students.forEach(student => student.id = getRandomId());
-                saveData();
-            }
+        let loadStudents = () => {
+            vm.students = entityService.loadData();
         }
 
         vm.initializeStudent = () => {
             vm.student = {};
         }
 
-        let getRandomId = () => {
-            return Math.floor(Math.random() * (+100 - +1)) + +1;
-        }
-
-        let saveData = () => {
-            localStorage.setItem("students", JSON.stringify(vm.students));
-        }
-
         vm.saveStudent = () => {
             vm.student.birthdate = vm.student.birthdate ? new Date(vm.student.birthdate) : new Date();
             if (vm.student.name && vm.student.surname && vm.student.gender && vm.student.email) {
                 if (vm.student.id) {
-                    vm.students.forEach(student => { if (student.id == vm.student.id) student = vm.student; });
+                    entityService.update(vm.student);
                 } else {
-                    vm.student.id = getRandomId();
-                    vm.students.push(vm.student);
+                    entityService.save(vm.student);
                 }
-                saveData();
+                loadStudents();
                 vm.initializeStudent();    
             }
         }
@@ -65,8 +48,8 @@
         }
 
         vm.deleteStudent = (index) => {
-            vm.students.splice(index, 1);
-            saveData();
+            entityService.delete(index);
+            loadStudents();
         }
 
         setDefaults();

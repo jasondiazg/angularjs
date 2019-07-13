@@ -19,7 +19,7 @@
             logger.print = (message) => {
                 switch($logLevel) {
                     case "DEBUG": {
-                        console.info(message);
+                        console.error(message);
                         break;
                     }
                     case "DEVELOP": {
@@ -28,6 +28,9 @@
                     }
                     case "QA": {
                         console.warn(message);
+                        break;
+                    }
+                    case "PRODUCTION": {
                         break;
                     }
                     default: {

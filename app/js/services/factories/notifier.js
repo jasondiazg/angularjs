@@ -10,28 +10,28 @@
 
             this.success = (message) => {
                 toast({ type: "success", title: message });
-                if (logger) {
+                if (logger === true) {
                     $logger.print("Type: success, message: " + message);
                 }
             }
 
             this.error = (message) => {
                 toast({ type: "error", title: message });
-                if (logger) {
+                if (logger === true) {
                     $logger.print("Type: error, message: " + message);
                 }
             }
 
             this.info = (message) => {
                 toast({ type: "info", title: message });
-                if (logger) {
+                if (logger === true) {
                     $logger.print("Type: info, message: " + message);
                 }
             }
 
             this.question = (message) => {
                 toast({ type: "question", title: message });
-                if (logger) {
+                if (logger === true) {
                     $logger.print("Type: question, message: " + message);
                 }
             }

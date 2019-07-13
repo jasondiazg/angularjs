@@ -103,17 +103,17 @@
         //     });
 
         $academikNavbarProvider.setNavbarElements(states);
-        console.log(greet);
+        console.log("Config stage... " + greet);
 
-        $loggerProvider.setLogLevel("QA");
+        $loggerProvider.setLogLevel("DEVELOP");
     };
 
     mainModule.config(mainModuleConfiguration);
     mainModuleConfiguration.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider", "$academikNavbarProvider", "greet", "$loggerProvider"];
 
     let runFunction = (greet, greetValue) => {
-        console.log(greetValue);
-        console.log(greet);
+        console.log("Run stage..." + greetValue);
+        console.log("Run stage..." + greet);
     }
 
     mainModule.run(runFunction);
