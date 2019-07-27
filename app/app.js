@@ -2,7 +2,7 @@
     'use strict';
     let mainModule = angular.module("academik", ["ui.router", "academik.navbar"]);
 
-    let mainModuleConfiguration = ($stateProvider, $locationProvider, $urlRouterProvider, $academikNavbarProvider, greet, $loggerProvider) => {
+    let mainModuleConfiguration = ($stateProvider, $locationProvider, $urlRouterProvider, $academikNavbarProvider, greet, $loggerProvider, $environmentProvider) => {
         $locationProvider.html5Mode(false);
         $urlRouterProvider.otherwise("/app/hello-world");
 
@@ -106,10 +106,11 @@
         console.log("Config stage... " + greet);
 
         $loggerProvider.setLogLevel("DEVELOP");
+        $environmentProvider.setEnvironment("development");
     };
 
     mainModule.config(mainModuleConfiguration);
-    mainModuleConfiguration.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider", "$academikNavbarProvider", "greet", "$loggerProvider"];
+    mainModuleConfiguration.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider", "$academikNavbarProvider", "greet", "$loggerProvider", "$environmentProvider"];
 
     let runFunction = (greet, greetValue) => {
         console.log("Run stage..." + greetValue);

@@ -3,59 +3,62 @@
 
     var module = angular.module("academik");
 
-    module.factory("EntityService", function (entityData) {
+    module.factory("EntityService", function (entityData, $http, environments, $environment) {
 
-        var entityService = function (entityName) {
-            this.loadData = () => {
-                let data = JSON.parse(localStorage.getItem(entityName));
-                if (!data) {
-                    return entityData[entityName].staticData;
+        let entityService = function (entityName) {
+            let buildConfig = (options) => {
+                let config = {
+                    method: "GET",
+                    url: environments[$environment.getEnvironment()].baseUrl + ":" + 
+                         environments[$environment.getEnvironment()].port + "/" + 
+                         environments[$environment.getEnvironment()].api,
+                };
+    
+                if (options.method) {
+                    config.method = options.method;
                 }
-                return data;
-            }
-
-            this.loadHeaders = () => {
-                return entityData[entityName].headers;
-            }
-
-            this.save = (entity) => {
-                let entities = this.loadData();
-
-                entities.sort((a, b) => {
-                    if (a.id < b.id)
-                        return -1;
-                    if (a.id > b.id)
-                        return 1;
-                    return 0;
-                });
-        
-                let newId = entities[entities.length - 1].id + 1;
-                entity.id = newId;
-
-                entities.push(entity);
-                localStorage.setItem(entityName, JSON.stringify(entities));
-            }
-
-            this.replace = (entities) => {
-                localStorage.setItem(entityName, JSON.stringify(entities));
-            }
-
-            this.update = (entityToUpdate) => {
-                let entities = this.loadData();
-                let index = entities.map(entity => entity.id).indexOf(entityToUpdate.id);
-
-                if (index != -1) {
-                    entities[index] = entityToUpdate;
+    
+                if (options.urlComplement) {
+                    config.url += options.urlComplement;
                 }
-
-                this.replace(entities);
+    
+                if (options.body) {
+                    config.body = options.body;
+                }
+    
+                return config;
             }
 
-            this.delete = (index) => {
-                let entities = this.loadData();
-                entities.splice(index, 1);
-                this.replace(entities);
+            this.loadMetadata = (actionSuccess, actionError) => {
+                let config = buildConfig({ urlComplement: "/" + entityData[entityName].endpoints.GETMetadata });
+                $http(config).then(actionSuccess, actionError);
             }
+
+            this.get = (actionSuccess, actionError) => {
+                let config = buildConfig({ urlComplement: "/" + entityData[entityName].endpoints.GET });
+                $http(config).then(actionSuccess, actionError);
+            }
+
+            this.getEntity = (id, actionSuccess, actionError) => {
+                let config = buildConfig({ urlComplement: "/" + entityData[entityName].endpoints.GET + "/" + id });
+                $http(config).then(actionSuccess, actionError);
+            }
+
+            this.save = (entity, actionSuccess, actionError) => {
+                let config = buildConfig({ urlComplement: "/" + entityData[entityName].endpoints.POST, body: entity, method: "POST" });
+                $http(config).then(actionSuccess, actionError);
+            }
+
+            this.update = (entity, actionSuccess, actionError) => {
+                let config = buildConfig({ urlComplement: "/" + entityData[entityName].endpoints.PUT, body: entity, method: "PUT" });
+                $http(config).then(actionSuccess, actionError);
+            }
+
+            this.delete = (id, actionSuccess, actionError) => {
+                let config = buildConfig({ urlComplement: "/" + entityData[entityName].endpoints.DELETE + "/" + id, method: "DELETE" });
+                $http(config).then(actionSuccess, actionError);
+            }
+
         };
 
         return entityService;

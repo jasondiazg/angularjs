@@ -2,12 +2,13 @@
     'use strict';
     let mainModule = angular.module("academik");
 
-    mainModule.controller("StudentsController", function(EntityService) {
+    mainModule.controller("StudentsController", function(EntityService, Notifier, $logger) {
         let vm = this;
-        let entityService;
+        let studentService, notifier;
 
         let setDefaults = () => {
-            entityService = new EntityService("student");
+            studentService = new EntityService("student");
+            notifier = new Notifier(true);
             loadData();
             vm.initializeStudent();
         }
@@ -18,11 +19,43 @@
         }
 
         let loadHeaders = () => {
-            vm.headers = entityService.loadHeaders();
+            studentService.loadMetadata(
+                (response) => {
+                    if (response.data.error){
+                        notifier.error(response.data.message);
+                    } else {
+                        notifier.success(response.data.message);
+                        vm.headers = ["Order"];
+                        for (let header in response.data.data) {
+                            if (header != "updatedAt" && header != "createdAt" && header != "__v") {
+                                vm.headers.push(transformToCapitalLetter(header));
+                            }
+                        }
+                    }
+                },
+                (error) => { notifier.error(error.data.message); $logger.print(error); }
+            );
+        }
+
+        let transformToCapitalLetter = (letter) => {
+            if (letter == "_id") {
+                return "Id";
+            }
+            return letter.substring(0,1).toUpperCase() + letter.substring(1,letter.length);
         }
 
         let loadStudents = () => {
-            vm.students = entityService.loadData();
+            studentService.get(
+                (response) => {
+                    if (response.data.error){
+                        notifier.error(response.data.message);
+                    } else {
+                        notifier.success(response.data.message);
+                        vm.students = response.data.data;
+                    }
+                },
+                (error) => { notifier.error(error.data.message); $logger.print(error); }
+            );
         }
 
         vm.initializeStudent = () => {
@@ -33,9 +66,9 @@
             vm.student.birthdate = vm.student.birthdate ? new Date(vm.student.birthdate) : new Date();
             if (vm.student.name && vm.student.surname && vm.student.gender && vm.student.email) {
                 if (vm.student.id) {
-                    entityService.update(vm.student);
+                    studentService.update(vm.student);
                 } else {
-                    entityService.save(vm.student);
+                    studentService.save(vm.student);
                 }
                 loadStudents();
                 vm.initializeStudent();    
@@ -48,7 +81,7 @@
         }
 
         vm.deleteStudent = (index) => {
-            entityService.delete(index);
+            studentService.delete(index);
             loadStudents();
         }
 
