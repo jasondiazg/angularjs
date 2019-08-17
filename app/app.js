@@ -1,10 +1,13 @@
 (() => {
     'use strict';
-    let mainModule = angular.module("academik", ["ui.router", "academik.navbar"]);
+    let mainModule = angular.module("academik", ["ui.router", "uiRouterStyles", "academik.navbar", "angular-jwt", "oc.lazyLoad"]);
 
-    let mainModuleConfiguration = ($stateProvider, $locationProvider, $urlRouterProvider, $academikNavbarProvider, greet, $loggerProvider, $environmentProvider) => {
+    let mainModuleConfiguration = ($stateProvider, $locationProvider, $urlRouterProvider, $academikNavbarProvider, greet, $loggerProvider, $environmentProvider, jwtOptionsProvider, environments, $httpProvider) => {
+        const logLevel = "DEVELOP";
+        const environment = "development";
+
         $locationProvider.html5Mode(false);
-        $urlRouterProvider.otherwise("/app/hello-world");
+        $urlRouterProvider.otherwise("/login");
 
         let states = [
             {
@@ -15,6 +18,15 @@
                     templateUrl: "app/app.html",
                     controller: "AppController",
                     controllerAs: "vm"
+                }
+            },
+            {
+                name: "login",
+                options: {
+                    title: "Login",
+                    url: "/login",
+                    template: "<login-component></login-component>",
+                    data: { css: ['app/css/login.css'] }
                 }
             },
             {
@@ -33,7 +45,7 @@
                     url: "/students",
                     templateUrl: "app/js/controllers/students/students.html",
                     controller: "StudentsController",
-                    controllerAs: "vm",
+                    controllerAs: "vm"
                 }
             },
             {
@@ -104,23 +116,47 @@
 
         $academikNavbarProvider.setNavbarElements(states);
         console.log("Config stage... " + greet);
+        console.log(environments[environment].domain + ':' + environments[environment].port);
 
-        $loggerProvider.setLogLevel("DEVELOP");
-        $environmentProvider.setEnvironment("development");
+        $loggerProvider.setLogLevel(logLevel);
+        $environmentProvider.setEnvironment(environment);
+
+        jwtOptionsProvider.config({
+            tokenGetter: ['options',
+                (options) => {
+                    if (options && options.url.substr(options.url.length - 5) == '.html') {
+                        return null;
+                    }
+
+                    return sessionStorage.getItem('sessionToken');
+                }],
+
+            whiteListedDomains: [environments[environment].domain]
+        });
+
+        //$httpProvider.interceptors.push('jwtInterceptor');
+        $httpProvider.interceptors.push('tokenInterceptor');
     };
 
     mainModule.config(mainModuleConfiguration);
-    mainModuleConfiguration.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider", "$academikNavbarProvider", "greet", "$loggerProvider", "$environmentProvider"];
+    mainModuleConfiguration.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider", "$academikNavbarProvider", "greet", "$loggerProvider", "$environmentProvider", "jwtOptionsProvider", "environments", "$httpProvider"];
 
-    let runFunction = (greet, greetValue) => {
+    let runFunction = (greet, greetValue, $authService, $state, $timeout, $transitions) => {
         console.log("Run stage..." + greetValue);
         console.log("Run stage..." + greet);
+
+        $transitions.onSuccess({}, () => {
+            if (!$authService.isAuthenticated()) {
+                $timeout(() => { $state.go('login') });
+            }
+        });
+
     }
 
     mainModule.run(runFunction);
-    runFunction.$inject = ["greet", "greetValue"];
+    runFunction.$inject = ["greet", "greetValue", "$authService", "$state", "$timeout", "$transitions"];
 
-    mainModule.controller("AppController", function ($academikNavbar) {
+    mainModule.controller("AppController", function ($academikNavbar, $authService, $state) {
         let vm = this;
 
         vm.isNavCollapsed = true;
@@ -128,6 +164,11 @@
         vm.isCollapsedHorizontal = false;
 
         vm.navbarElements = $academikNavbar.elements.get();
+
+        vm.logout = () => {
+            $authService.logout();
+            $state.go('login');
+        }
     });
 
 })();

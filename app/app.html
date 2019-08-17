@@ -1,19 +1,23 @@
 <div>
-  <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-          <button type="button" class="navbar-toggle" ng-click="vm.isNavCollapsed = !vm.isNavCollapsed">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Academik</a>
-      </div>
-      <div class="collapse navbar-collapse" uib-collapse="vm.isNavCollapsed">
-          <ul class="nav navbar-nav" ng-repeat="element in vm.navbarElements">
-              <li ng-if="!element.options.abstract"><a ui-sref="{{element.name}}" ui-sref-active="active">{{element.options.title}}</a></li>
-          </ul>
-      </div>
-  </nav>
-  <ui-view></ui-view>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="vm.isNavCollapsed = !vm.isNavCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Academik</a>
+        </div>
+        <div class="collapse navbar-collapse" uib-collapse="vm.isNavCollapsed">
+            <ul class="nav navbar-nav" ng-repeat="element in vm.navbarElements">
+                <li ng-if="!element.options.abstract && element.name != 'login'"><a ui-sref="{{element.name}}"
+                        ui-sref-active="active">{{element.options.title}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a ng-click="vm.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <ui-view></ui-view>
 </div>

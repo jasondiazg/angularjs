@@ -33,7 +33,7 @@
                         }
                     }
                 },
-                (error) => { notifier.error(error.data.message); $logger.print(error); }
+                (error) => { if (error) notifier.error(error.data.message); $logger.print(error); }
             );
         }
 
@@ -66,9 +66,9 @@
             vm.student.birthdate = vm.student.birthdate ? new Date(vm.student.birthdate) : new Date();
             if (vm.student.name && vm.student.surname && vm.student.gender && vm.student.email) {
                 if (vm.student.id) {
-                    studentService.update(vm.student);
+                    studentService.update(vm.student, success, error);
                 } else {
-                    studentService.save(vm.student);
+                    studentService.save(vm.student, success, error);
                 }
                 loadStudents();
                 vm.initializeStudent();    
@@ -84,6 +84,9 @@
             studentService.delete(index);
             loadStudents();
         }
+
+        let success = (response) => { notifier.success(response.data.message); }
+        let error = (response) => { notifier.error(response.data.message); }
 
         setDefaults();
     });

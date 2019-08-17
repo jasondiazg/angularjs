@@ -5,17 +5,20 @@
 
     module.constant("environments", {
         "development": {
-            "baseUrl": "http://localhost",
+            "protocol": "http",
+            "domain": "localhost",
             "api": "api",
             "port": "3001"
         },
         "qa": {
-            "baseUrl": "http://192.168.3.4",
+            "protocol": "http",
+            "domain": "http://192.168.3.4",
             "api": "api",
             "port": "8080"
         },
         "production": {
-            "baseUrl": "https://academik.com",
+            "protocol": "https",
+            "domain": "academik.com",
             "api": "api",
             "port": "80"
         }

@@ -4,8 +4,15 @@
     var module = angular.module("academik");
 
     module.constant("entityData", {
+        "auth": {
+            "endpoints": {
+                "BASE": "login",
+                "POST": "login",
+            }
+        },
         "student": {
             "endpoints": {
+                "BASE": "student",
                 "GET": "student",
                 "POST": "student",
                 "PUT": "student",
