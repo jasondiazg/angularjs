@@ -8,6 +8,7 @@
             "endpoints": {
                 "BASE": "login",
                 "POST": "login",
+                "LOGOUT": "logout",
             }
         },
         "student": {

@@ -145,7 +145,7 @@
         console.log("Run stage..." + greetValue);
         console.log("Run stage..." + greet);
 
-        $transitions.onSuccess({}, () => {
+        $transitions.onCreate({}, () => {
             if (!$authService.isAuthenticated()) {
                 $timeout(() => { $state.go('login') });
             }

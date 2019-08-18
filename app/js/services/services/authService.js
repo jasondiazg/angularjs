@@ -7,6 +7,7 @@
         let entityService = new EntityService("auth");
         let notifier = new Notifier(true);
 
+        /* Public functions */
         this.isAuthenticated = () => {
             return (isAValidToken() && this.getUserData() && this.getUserData().id);
         }
@@ -35,6 +36,8 @@
             return sessionStorage.getItem('sessionToken');
         }
 
+        /* Private functions */
+
         let onEndActionSuccess = (actionSuccess) => {
             return (response) => {
                 sessionStorage.setItem('sessionToken', response.data.data);
@@ -54,7 +57,7 @@
         }
 
         let getTokenData = (token) => {
-            return jwtHelper.decodeToken(token)
+            return jwtHelper.decodeToken(token);
         }
 
         let isAValidToken = () => {

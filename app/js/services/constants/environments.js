@@ -12,7 +12,7 @@
         },
         "qa": {
             "protocol": "http",
-            "domain": "http://192.168.3.4",
+            "domain": "192.168.3.4",
             "api": "api",
             "port": "8080"
         },
