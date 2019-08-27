@@ -6,6 +6,8 @@ div[ng-controller] {
 
 .error-validation {
   color: red;
+  font-size: 0.9em;
+  display: flex;
 }
 
 .red {
@@ -89,4 +91,8 @@ div[ng-controller] {
 }
 .slide-animate.ng-leave.ng-leave-active {
   top:50px;
+}
+
+.swal2-popup {
+  font-size: 1.6rem !important;
 }

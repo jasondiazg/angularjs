@@ -49,10 +49,7 @@
         templateUrl: 'app/js/components/login/login.component.html',
         controller: componentController,
         controllerAs: 'vm',
-        bindings:
-        {
-            connectionComponent: '='
-        }
+        bindings: { }
     };
 
     mainModule.component('loginComponent', component);

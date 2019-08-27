@@ -49,6 +49,22 @@
                 }
             },
             {
+                name: "app.studentEntity",
+                options: {
+                    title: "Students Entity Component",
+                    url: "/student-entity",
+                    template: "<entity-component entity-name='student'></entity-component>"
+                }
+            },
+            {
+                name: "app.userEntity",
+                options: {
+                    title: "Users Entity Component",
+                    url: "/user-entity",
+                    template: "<entity-component entity-name='user'></entity-component>"
+                }
+            },
+            {
                 name: "app.directives",
                 options: {
                     title: "Directives",
@@ -134,7 +150,7 @@
             whiteListedDomains: [environments[environment].domain]
         });
 
-        //$httpProvider.interceptors.push('jwtInterceptor');
+        // $httpProvider.interceptors.push('jwtInterceptor');
         $httpProvider.interceptors.push('tokenInterceptor');
     };
 

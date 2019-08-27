@@ -19,7 +19,19 @@
                 "PUT": "student",
                 "DELETE": "student",
                 "GETMetadata": "student/metadata"
-            }
+            },
+            "requiredProperties": ["name", "surname", "gender", "email"]
+        },
+        "user": {
+            "endpoints": {
+                "BASE": "user",
+                "GET": "user",
+                "POST": "user",
+                "PUT": "user",
+                "DELETE": "user",
+                "GETMetadata": "user/metadata"
+            },
+            "requiredProperties": ["username"]
         },
         "hobbies": {
             "headers": [

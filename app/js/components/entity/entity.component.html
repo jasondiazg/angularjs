@@ -1,0 +1,51 @@
+<div class="container">
+    <form name="vm.entityForm" ng-submit="vm.save()">
+        <div class="row">
+            <div class="form-group col-xs-6" ng-repeat="header in vm.headers" ng-if="header.display != 'Id' && header.display != 'Order'">
+                <label for="name">{{header.display}}</label>
+                <input type="{{header.type}}" class="form-control" id="{{header.value}}" name="{{header.value}}" ng-model="vm.entity[header.value]" ng-required="header.required">
+                <div ng-if="vm.entityForm.$error" class="error-validation">
+                    <label ng-show="vm.entityForm[header.value].$error.required">This property is required!</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button id="save" type="submit" class="btn btn-success" ng-disabled="!vm.entityForm.$valid">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>
+                    <span>&nbsp;&nbsp;Save</span>
+                </button>
+                <button id="clear" type="button" class="btn btn-default" ng-click="vm.initializeEntity()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span>&nbsp;&nbsp;Clear</span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <br/><br/>
+
+    <table class="table table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th scope="col" ng-repeat="header in vm.headers">{{header.display}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="entity in vm.entities track by entity._id">
+                <td>{{$index + 1}}</td>
+                <td ng-repeat="header in vm.headers" ng-if="header.display != 'Order'">{{entity[header.value]}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" ng-click="vm.modify(entity)">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-xs hidden-sm">&nbsp;&nbsp;Edit</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.delete(entity._id)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <span class="hidden-xs hidden-sm">&nbsp;&nbsp;Delete</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

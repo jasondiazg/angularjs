@@ -78,6 +78,10 @@
                 $http(config).then(actionSuccess, actionError);
             }
 
+            this.getRequiredProperties = () => {
+                return entityData[entityName].requiredProperties;
+            }
+
             this.baseUrl = () => {
                 return getBaseUrl() + "/" + entityData[entityName].endpoints.BASE;
             }
