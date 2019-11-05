@@ -65,6 +65,14 @@
                 }
             },
             {
+                name: "app.components",
+                options: {
+                    title: "Uses of Components",
+                    url: "/components",
+                    template: "<academik-component></academik-component>"
+                }
+            },
+            {
                 name: "app.directives",
                 options: {
                     title: "Directives",

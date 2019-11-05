@@ -1,0 +1,18 @@
+<div class="container" ng-if="vm.student">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3><strong>Name: {{vm.student.name.title + ' ' + vm.student.name.first + ' ' + vm.student.name.last}}</strong></h3>
+            <p>Position: {{vm.position | number}}</p>
+            <p>Location: {{vm.student.location.street + ' city: ' + vm.student.location.city + ' state: ' + vm.student.location.state }}</p>
+            <p>Gender: {{vm.student.gender}}</p>
+            <p>Contact: {{'Phone ' + vm.student.phone + ' cellphone: ' + vm.student.cell }}</p>
+            <p>Birthdate: {{vm.student.dob.date | date: 'medium'}} Age: {{vm.student.dob.age}}</p>
+            <p>Next student: {{vm.nextStudent}}</p>
+            <button ng-click="vm.credits({ name: vm.student.name.first + ' ' + vm.student.name.last, credits: vm.student.credits })"> Show Credits</button>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <br/><br/>
+            <img ng-src="{{vm.student.picture.large}}" />
+        </div>
+    </div>
+</div>

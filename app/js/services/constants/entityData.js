@@ -33,6 +33,9 @@
             },
             "requiredProperties": ["username"]
         },
+        "randomUserApi": {
+            "randomUrl": "https://randomuser.me/api/"
+        },
         "hobbies": {
             "headers": [
                 "name",

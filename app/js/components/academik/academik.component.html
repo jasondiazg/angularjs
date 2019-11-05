@@ -1,0 +1,20 @@
+<div class="container">
+    <student-info-component
+        ng-repeat="student in vm.entities track by $index"
+        student="student"
+        position="{{$index}}"
+        next="vm.next"
+        credits="vm.showCredits(name, credits)">
+    </student-info-component>
+</div>
+<h1>Students CRUD</h1>
+<entity-component entity-name='student'></entity-component>
+<h1>User CRUD</h1>
+<entity-component entity-name='user'></entity-component>
+<student-info-component
+    student="{ name: { title: 'Mr.', first: 'Gerardo', last: 'Tzoc' }, credits: '100' }"
+    position="999999"
+    next="vm.next"
+    credits="vm.showCredits(name, credits)">
+
+</student-info-component>
