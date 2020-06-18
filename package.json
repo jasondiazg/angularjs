@@ -24,7 +24,7 @@
   "homepage": "https://github.com/jasondiazg/angularjs#readme",
   "dependencies": {
     "@uirouter/angularjs": "^1.0.3",
-    "angular": "^1.7.8",
+    "angular": "^1.8.0",
     "angular-animate": "^1.7.8",
     "angular-jwt": "^0.1.11",
     "angular-sanitize": "^1.7.8",
